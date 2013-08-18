@@ -17,6 +17,7 @@ describe User do
   it { should respond_to(:authenticate) }
   it { should respond_to(:remember_token) }
   it { should respond_to(:admin)}
+  it { should respond_to(:calendars)}
 
   it { should be_valid }
   it { should_not be_admin}
@@ -132,4 +133,26 @@ describe User do
     its(:remember_token) { should_not be_blank }
   end
 
+  describe "calendar associations" do
+    before {@user.save}
+    let!(:older_calendar) do
+      FactoryGirl.create(:calendar, user: @user, created_at: 1.hour.from_now)
+    end
+    let!(:newer_calendar) do
+      FactoryGirl.create(:calendar, user: @user, created_at: 1.day.from_now)
+    end
+    
+    it "should have the right calendar in the right order" do
+      expect(@user.calendars.to_a).to eq [newer_calendar, older_calendar]
+    end
+    
+    it "should destroy associated calendars" do
+      calendars = @user.calendars.to_a
+      @user.destroy
+      expect(calendars).not_to be_empty
+      calendars.each do |calendar|
+        expect(Calendar.where(id: calendar.id)).to be_empty
+      end
+    end
+  end
 end

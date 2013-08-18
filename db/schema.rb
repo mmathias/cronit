@@ -11,7 +11,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130817222121) do
+ActiveRecord::Schema.define(version: 20130818014345) do
+
+  create_table "actions", force: true do |t|
+    t.string   "command"
+    t.integer  "calendar_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "actions", ["calendar_id"], name: "index_actions_on_calendar_id", using: :btree
+
+  create_table "calendar_items", force: true do |t|
+    t.datetime "execution_date"
+    t.boolean  "done",           default: false
+    t.integer  "calendar_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "calendar_items", ["calendar_id"], name: "index_calendar_items_on_calendar_id", using: :btree
+
+  create_table "calendars", force: true do |t|
+    t.datetime "start_date"
+    t.string   "how_often"
+    t.string   "how_long"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "calendars", ["user_id"], name: "index_calendars_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"

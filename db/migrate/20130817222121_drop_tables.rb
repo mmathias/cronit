@@ -1,6 +1,0 @@
-class DropTables < ActiveRecord::Migration
-  def change
-    drop_table :microposts
-    drop_table :relationships
-  end
-end
