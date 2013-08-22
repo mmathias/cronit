@@ -1,30 +1,22 @@
 require 'spec_helper'
 
 describe CalendarItem do
-  let(:calendar) {FactoryGirl.create(:calendar_with_items)}
+  subject{ calendar_item }
 
-  before{ @calendar_item = calendar.calendar_items.build(execution_date: Time.now()) }
-  
-  subject{ @calendar_item }
-  
-  it { should respond_to(:execution_date)}
-  it { should respond_to(:done)}
-  it { should respond_to(:calendar)}
-  
-  its (:calendar) { should eq calendar}
+  let(:calendar) {FactoryGirl.create(:calendar)}
+  let(:calendar_item) {FactoryGirl.create(:calendar_item, calendar: :calendar)}
 
-  it{should be_valid}
+  its(:valid?) {should be_true}
   
-  describe "when execution_date is not present" do
-    before {@calendar_item.execution_date = nil}
-    it{should_not be_valid}
-  end
-  describe "when done is not present" do
-    before {@calendar_item.done = nil}
-    it{should_not be_valid}
-  end
-  describe "when calendar is not present" do
-    before {@calendar_item.calendar = nil}
-    it{should_not be_valid}
+  describe "validations" do
+    it "requires execution_date" do
+      expect {calendar_item.execution_date = nil}.to change {calendar_item.valid?}.from(true).to(false)
+    end
+    it "requires done" do
+      expect {calendar_item.done = nil}.to change {calendar_item.valid?}.from(true).to(false)
+    end
+    it "requires calendar_id" do
+      expect {calendar_item.calendar_id = nil}.to change {calendar_item.valid?}.from(true).to(false)
+    end
   end
 end

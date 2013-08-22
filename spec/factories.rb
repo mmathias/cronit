@@ -10,17 +10,6 @@ FactoryGirl.define do
     end
   end
   
-  factory :action do
-    calendar
-    command 'mandar email'
-  end
-
-  factory :calendar_item do
-    calendar
-    execution_date 1.day.from_now
-    done false
-  end
-  
   factory :calendar do
   	start_date 1.hour.from_now
   	how_often 'everyday'
@@ -35,6 +24,17 @@ FactoryGirl.define do
         |calendar, evaluator| FactoryGirl.create_list(:calendar_item, evaluator.calendar_items_count, :calendar => calendar) 
       end 
     end
+  end
+  
+  factory :action  do
+    calendar
+    command 'mandar email'
+  end
+
+  factory :calendar_item do
+    calendar
+    execution_date 1.day.from_now
+    done false
   end
 
 end
