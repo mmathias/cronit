@@ -2,8 +2,9 @@ namespace :db do
 	desc "Fill database with sample data"
 	task populate: :environment do
 		make_users
-		make_microposts
-		make_relationships
+		make_calendars
+    make_calendar_items
+    make_actions
 	end
 end
 
@@ -24,19 +25,17 @@ def make_users
 	end
 end
 
-def make_microposts
+def make_calendars
 	users = User.all(limit: 6)
-	50.times do
-		content = Faker::Lorem.sentence(5)
-		users.each{ |user| user.microposts.create!(content: content)}
+  i=0
+	5.times do
+    i += 1
+		start_date = i.hour.from_now
+		users.each{ |user| user.calendars.create!(start_date: start_date, how_often: 'everyday', how_long: '1month')}
 	end
 end
 
-def make_relationships
-	users = User.all
-	user = users.first
-	followed_users = users[2..50]
-	followers      = users[3..40]
-	followed_users.each { |followed| user.follow!(followed)}
-	followers.each 		{ |follower| follower.follow!(user)}
+def make_actions
+	calendars = Calendar.all
+  calendars.each{ |calendar| calendar.actions.create!(command: Faker::Lorem.sentence(10))}
 end

@@ -1,0 +1,8 @@
+<li>
+  <span class="start_date"><%= calendar.start_date %></span>
+  <span class="how_often"><%= calendar.how_often %></span>
+  <span class="how_long"><%= calendar.how_long %></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(calendar.created_at) %> ago.
+  </span>
+</li>

@@ -52,11 +52,19 @@ describe "User pages" do
 
   describe "profile page" do
     let(:user) { FactoryGirl.create(:user) }
+    let!(:c1) { FactoryGirl.create(:calendar, user: user, start_date: 1.hour.from_now) }
+    let!(:c2) { FactoryGirl.create(:calendar, user: user, start_date: 2.hour.from_now) }
     before { visit user_path(user) }
 
     it { should have_content(user.name) }
     it { should have_title(user.name) }
 
+    describe "calendars" do
+      it { should have_content(c1.start_date)}
+      it { should have_content(c2.start_date)}
+      it { should have_content(user.calendars.count)}
+    end
+    
   end
 
   describe "signup page" do

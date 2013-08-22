@@ -9,5 +9,12 @@
     </section>
   </aside>
   <div class="span8">
+    <% if @user.calendars.any? %>
+      <h3>Calendars (<%= @user.calendars.count %>)</h3>
+      <ol class="calendars">
+        <%= render @calendars %>
+      </ol>
+      <%= will_paginate @calendars %>
+    <% end %>
   </div>
 </div>

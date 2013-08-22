@@ -1,19 +1,22 @@
 <% if signed_in? %>
-	<div class="row">
-		<aside class="span4">
-			<section>
-				<%= render 'shared/user_info' %>
-			</section>
-		</aside>
-	</div>
+  <div class="row">
+    <aside class="span5">
+      <section>
+        <%= render 'shared/user_info' %>
+      </section>
+      <section>
+        <%= render 'shared/calendar_form' %>
+      </section>
+    </aside>
+  </div>
 <% else %>
-	<div class="center hero-unit">
-	  <h1>Welcome to Cron it</h1>
+  <div class="center hero-unit">
+    <h1>Welcome to Cron it</h1>
 
-	  <h2>
-	    This is a trial application.
-	  </h2>
+    <h2>
+      This is a trial application.
+    </h2>
 
-	  <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
-	</div>
+    <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
+  </div>
 <% end %>

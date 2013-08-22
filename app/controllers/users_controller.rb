@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-#    @microposts = @user.microposts.paginate(page: params[:page])
+    @calendars = @user.calendars.paginate(page: params[:page])
   end
 
   def new
@@ -45,7 +45,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    #sera
     @user = User.find(params[:id])
   end
 

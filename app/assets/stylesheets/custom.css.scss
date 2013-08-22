@@ -186,6 +186,10 @@ input, textarea, select, .uneditable-input {
   @include box_sizing;
 }
 
+select {
+  width: auto;
+}
+
 input {
   height: auto !important;
 }
@@ -219,9 +223,9 @@ input {
 }
 
 
-/* microposts */
+/* calendars */
 
-.microposts {
+.calendars {
   list-style: none;
   margin: 10px 0 0 0;
 
