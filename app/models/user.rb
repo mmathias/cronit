@@ -23,9 +23,9 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true
   validates :password, length: { minimum: 6 }
 
-  #def feed 
-  #  Micropost.from_users_followed_by(self)
-  #end
+  def feed 
+    Calendar.all
+  end
 
   def User.new_remember_token
     SecureRandom.urlsafe_base64

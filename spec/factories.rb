@@ -12,8 +12,8 @@ FactoryGirl.define do
   
   factory :calendar do
   	start_date 1.hour.from_now
-  	how_often 'everyday'
-  	how_long '1year'
+  	how_often 'weekly'
+  	how_long '1 month'
   	user
     
     factory :calendar_with_items do 

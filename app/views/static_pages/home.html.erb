@@ -1,11 +1,17 @@
 <% if signed_in? %>
   <div class="row">
-    <aside class="span5">
+    <aside class="span3">
       <section>
         <%= render 'shared/user_info' %>
       </section>
+    </aside>
+    <aside class="span7">
+      <h3>Calendar Feed</h3>
       <section>
         <%= render 'shared/calendar_form' %>
+      </section>
+      <section>
+        <%= render 'shared/feed' %>
       </section>
     </aside>
   </div>

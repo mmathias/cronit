@@ -18,6 +18,7 @@ describe User do
   it { should respond_to(:remember_token) }
   it { should respond_to(:admin)}
   it { should respond_to(:calendars)}
+  it { should respond_to(:feed)}
 
   it { should be_valid }
   it { should_not be_admin}
@@ -152,6 +153,25 @@ describe User do
       expect(calendars).not_to be_empty
       calendars.each do |calendar|
         expect(Calendar.where(id: calendar.id)).to be_empty
+      end
+    end
+    
+    describe "status" do
+      let(:another_users_calendar) do
+        FactoryGirl.create(:calendar, user: FactoryGirl.create(:user))
+      end
+
+      before do
+        3.times { @user.calendars.create!(start_date: "2013-08-23 00:17:00", how_often: "daily", how_long: "1 year" )}
+      end
+
+      its(:feed) { should include(newer_calendar)}
+      its(:feed) { should include(older_calendar)}
+      its(:feed) { should_not include(another_users_calendar)}
+      its(:feed) do
+        @user.calendars.each do |calendar|
+          should include(calendar)
+        end 
       end
     end
   end

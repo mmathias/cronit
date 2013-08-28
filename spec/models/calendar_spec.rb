@@ -3,8 +3,7 @@ require 'spec_helper'
 describe Calendar do
   subject{ calendar }
   
-  #let(:user) {FactoryGirl.create(:user)}
-  let(:calendar) {FactoryGirl.create(:calendar_with_items)}
+  let(:calendar) {FactoryGirl.create(:calendar, user: FactoryGirl.create(:user))}
   
   
   #it { should respond_to(:start_date)}
@@ -21,16 +20,16 @@ describe Calendar do
   describe "validations" do
     
     it "requires user_id" do
-      expect(:calendar.user_id = null).to change (calendar.valid?).from(true).to(false)
+      expect(:calendar.user_id = nil).to change (calendar.valid?).from(true).to(false)
     end
     it "requires start_date" do
-      expect(:calendar.start_date = null).to change (calendar.valid?).from(true).to(false)
+      expect(:calendar.start_date = nil).to change (calendar.valid?).from(true).to(false)
     end
     it "requires how_often" do
-      expect(:calendar.how_often = null).to change (calendar.valid?).from(true).to(false)
+      expect(:calendar.how_often = nil).to change (calendar.valid?).from(true).to(false)
     end
     it "requires how_long" do
-      expect(:calendar.how_long = null).to change (calendar.valid?).from(true).to(false)
+      expect(:calendar.how_long = nil).to change (calendar.valid?).from(true).to(false)
     end
     
     describe "calendar_items associations" do

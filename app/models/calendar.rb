@@ -14,9 +14,9 @@ class Calendar < ActiveRecord::Base
     #take the start date + how_long = end_date
     #eg. 10/10/2010 + 1 year
     how_long_splitted = self.how_long.split
-    times = how_long_splitted[0]
+    times = how_long_splitted[0].to_i
     period = how_long_splitted[1]
-    end_date = self.start_date + times.to_i.send(period)
+    end_date = self.start_date + times.send(period)
     
     execution_date = self.start_date
     while execution_date < end_date do
@@ -25,6 +25,8 @@ class Calendar < ActiveRecord::Base
       addition = ''
       often = self.how_often
       case often
+      when 'daily'
+        addition = 'day' 
       when 'hourly'
         addition = 'hour' 
       when 'weekly'
@@ -33,8 +35,6 @@ class Calendar < ActiveRecord::Base
         addition = 'month' 
       when 'yearly'
         addition = 'year' 
-      else
-        puts 'You are making it up'
       end
       execution_date = execution_date + 1.send(addition)
       self.calendar_items.build(execution_date: execution_date, done: false )
