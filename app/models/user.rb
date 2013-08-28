@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6 }
 
   def feed 
-    Calendar.all
+    self.calendars
   end
 
   def User.new_remember_token

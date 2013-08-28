@@ -13,11 +13,11 @@ describe "Calendar pages" do
     describe "with invalid information" do
 
       it "should not create a calendar" do
-        expect { click_button "Post" }.not_to change(Calendar, :count)
+        expect { click_button "Add" }.not_to change(Calendar, :count)
       end
 
       describe "error messages" do
-        before { click_button "Post" }
+        before { click_button "Add" }
         it { should have_content('error') }
       end
     end
@@ -29,10 +29,10 @@ describe "Calendar pages" do
       before { select "19", :from => 'calendar_start_date_3i' }
       before { select "19", :from => 'calendar_start_date_4i' }
       before { select "27", :from => 'calendar_start_date_5i' }
-      before { fill_in 'calendar_how_often', with: "Lorem ipsum" }
-      before { fill_in 'calendar_how_long', with: "Lorem ipsum" }
+      before { fill_in 'calendar_how_often', with: "weekly" }
+      before { fill_in 'calendar_how_long', with: "1 month" }
       it "should create a calendar" do
-        expect { click_button "Post" }.to change(Calendar, :count).by(1)
+        expect { click_button "Add" }.to change(Calendar, :count).by(1)
       end
     end
   end

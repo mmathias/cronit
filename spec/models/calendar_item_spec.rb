@@ -3,8 +3,7 @@ require 'spec_helper'
 describe CalendarItem do
   subject{ calendar_item }
 
-  let(:calendar) {FactoryGirl.create(:calendar)}
-  let(:calendar_item) {FactoryGirl.create(:calendar_item, calendar: :calendar)}
+  let(:calendar_item) {FactoryGirl.create(:calendar_item)}
 
   its(:valid?) {should be_true}
   
