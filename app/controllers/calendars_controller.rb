@@ -20,7 +20,7 @@ class CalendarsController < ApplicationController
   
   private 
     def calendar_params
-      params.require(:calendar).permit(:start_date, :how_often, :how_long)
+      params.require(:calendar).permit(:start_date, :how_often, :how_long, :actions)
 #      params.require(:calendar).permit(:calendar_items)
 #      params.require(:calendar).permit(:actions)
     end

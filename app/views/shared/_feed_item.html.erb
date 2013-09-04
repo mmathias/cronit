@@ -1,10 +1,24 @@
+<fieldset>
+  
+</fieldset>
+
 <li id="<%= feed_item.id %>">
-  <span class="content"><%= feed_item.id %> </span>
-  <span class="content"><%= feed_item.start_date %> </span>
+  <span class="content">Calendar <%= feed_item.id %> </span>
+  Start Date:
+  <span class="content"><%= feed_item.start_date.to_formatted_s(:long_ordinal) %> </span>
+  How Long:
   <span class="content"><%= feed_item.how_long %> </span>
+  How Often:
   <span class="content"><%= feed_item.how_often %> </span>
-  <span class="content"><%= feed_item.actions %> </span>
-  <span class="content"><%= feed_item.calendar_items %> </span>
+  Actions:
+  <div class="actions">
+    <%= render partial: 'shared/action_item', collection: feed_item.actions %>
+  </div>
+  Calendar items:
+  <div class="calendar_items">
+    <%= render partial: 'shared/calendar_item_item', collection: feed_item.calendar_items %>
+  </div>
+  
   <span class="timestamp">
     Posted <%= time_ago_in_words(feed_item.created_at) %> ago.
   </span>
