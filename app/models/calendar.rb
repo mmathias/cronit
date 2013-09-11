@@ -7,6 +7,8 @@ class Calendar < ActiveRecord::Base
   validates :start_date , presence: true
   validates :how_often, presence: true
   validates :how_long, presence: true
+
+  accepts_nested_attributes_for :actions, :reject_if => lambda { |a| a[:content].blank? }, :allow_destroy => true
 #  validates :calendar_items, presence: true
 #  validates :actions, presence: true
 

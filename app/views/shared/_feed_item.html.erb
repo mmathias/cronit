@@ -1,24 +1,33 @@
-<fieldset>
-  
-</fieldset>
-
 <li id="<%= feed_item.id %>">
-  <span class="content">Calendar <%= feed_item.id %> </span>
-  Start Date:
-  <span class="content"><%= feed_item.start_date.to_formatted_s(:long_ordinal) %> </span>
-  How Long:
-  <span class="content"><%= feed_item.how_long %> </span>
-  How Often:
-  <span class="content"><%= feed_item.how_often %> </span>
-  Actions:
-  <div class="actions">
-    <%= render partial: 'shared/action_item', collection: feed_item.actions %>
+  <span class="title">Calendar <%= feed_item.id %> </span>
+  <div class="show-field">
+    <span class="content-label">Start Date:</span>
+    <span class="content"><%= feed_item.start_date.to_formatted_s(:long_ordinal) %> </span>
   </div>
-  Calendar items:
-  <div class="calendar_items">
-    <%= render partial: 'shared/calendar_item_item', collection: feed_item.calendar_items %>
+  <div class="show-field">
+    <span class="content-label">How Long:</span>
+    <span class="content"><%= feed_item.how_long %> </span>
   </div>
-  
+  <div class="show-field">
+    <span class="content-label">How Often:</span>
+    <span class="content"><%= feed_item.how_often %> </span>
+  </div>
+  <div class="show-field">
+    <span class="content-label">Actions: </span>
+    <span class="content">
+      <ul class="subitems">
+        <%= render partial: 'shared/action_item', collection: feed_item.actions %>
+      </ul>
+    </span>
+  </div>
+  <div class="show-field">
+    <span class="content-label">Calendar items:</span>
+    <span class="content">
+      <ul class="subitems">
+        <%= render partial: 'shared/calendar_item_item', collection: feed_item.calendar_items %>
+      </ul>
+    </span>
+  </div>
   <span class="timestamp">
     Posted <%= time_ago_in_words(feed_item.created_at) %> ago.
   </span>

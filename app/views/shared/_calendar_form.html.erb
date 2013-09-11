@@ -12,9 +12,11 @@
   <div class="field">
     <%= f.text_field :how_long, placeholder: "eg. 1 year, 2 months" %>
   </div>
-  Actions:
-  <div class="field actions">
-    <%= render partial: 'shared/action_form' %>
-  </div>
+
+  <p><%= link_to_add_fields "Add Action", f, :actions %></p>
+  <%= f.fields_for :actions do |builder| %>
+    <%= render "shared/action_fields", :f => builder %>
+  <% end %>
+
   <%= f.submit "Add", class: "btn btn-large btn-primary" %>
 <% end %>
