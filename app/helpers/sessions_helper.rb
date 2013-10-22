@@ -42,4 +42,8 @@ module SessionsHelper
   def store_location
     session[:return_to] = request.url 
   end
+
+  def business?
+    current_user.is_a?Business
+  end
 end

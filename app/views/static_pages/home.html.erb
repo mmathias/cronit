@@ -5,15 +5,21 @@
         <%= render 'shared/user_info' %>
       </section>
     </aside>
-    <aside class="span7">
-      <h3>Calendar Feed</h3>
-      <section>
-        <%= render 'shared/calendar_form' %>
-      </section>
-      <section>
-        <%= render 'shared/feed' %>
-      </section>
-    </aside>
+    <% if business? %>
+      <aside class="span7">
+        <h3>Product Feed</h3>
+        <section>
+          <%= render 'shared/product_form' %>
+        </section>
+        <section>
+          <%= render 'shared/feed' %>
+        </section>
+      </aside>
+    <% else %>
+      <aside class="span7">
+        <h3>Create your Schedule7y7y</h3>
+      </aside> 
+    <% end %>
   </div>
 <% else %>
   <div class="center hero-unit">
@@ -23,6 +29,7 @@
       This is a trial application.
     </h2>
 
-    <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
+    <%= link_to "Sign up as a user now!", signup_users_path, class: "btn btn-large btn-primary" %>
+    <%= link_to "Sign up as a business now!", signup_businesses_path, class: "btn btn-large btn-primary" %>
   </div>
 <% end %>

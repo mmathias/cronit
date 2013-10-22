@@ -1,20 +1,18 @@
 <% provide(:title, @user.name) %>
 <div class="row">
-  <aside class="span4">
+  <aside class="span3">
     <section>
       <h1>
+      <%= @user.type%>
         <%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
     </section>
   </aside>
-  <div class="span8">
-    <% if @user.calendars.any? %>
-      <h3>Calendars (<%= @user.calendars.count %>)</h3>
-      <ol class="calendars">
-        <%= render @calendars %>
-      </ol>
-      <%= will_paginate @calendars %>
-    <% end %>
-  </div>
+  <aside class="span7">
+    <section>
+      <h3>Create your Schedule</h3>
+      <%= render 'users/schedule' %>
+    </section>
+  </aside>
 </div>

@@ -68,15 +68,15 @@ describe "User pages" do
   end
 
   describe "signup page" do
-    before { visit signup_path }
+    before { visit signup_user_path }
 
     it { should have_content('Sign up') }
     it { should have_title(full_title('Sign up')) }
   end
 
-  describe "signup" do
+  describe "signup user" do
 
-    before { visit signup_path }
+    before { visit signup_user_path }
 
     let(:submit) { "Create my account" }
 
@@ -120,7 +120,6 @@ describe "User pages" do
       sign_in user
       visit edit_user_path(user)
     end
-    #before{ visit edit_user_path(user)}
 
     describe "page" do
       it { should have_content("Update your profile")}

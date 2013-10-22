@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130818014345) do
+ActiveRecord::Schema.define(version: 20131009232153) do
 
   create_table "actions", force: true do |t|
     t.string   "command"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20130818014345) do
     t.datetime "updated_at"
   end
 
-  add_index "actions", ["calendar_id"], name: "index_actions_on_calendar_id", using: :btree
+  add_index "actions", ["calendar_id"], name: "index_actions_on_calendar_id"
 
   create_table "calendar_items", force: true do |t|
     t.datetime "execution_date"
@@ -28,9 +28,12 @@ ActiveRecord::Schema.define(version: 20130818014345) do
     t.integer  "calendar_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "product_id"
+    t.integer  "quantity"
+    t.decimal  "price"
   end
 
-  add_index "calendar_items", ["calendar_id"], name: "index_calendar_items_on_calendar_id", using: :btree
+  add_index "calendar_items", ["calendar_id"], name: "index_calendar_items_on_calendar_id"
 
   create_table "calendars", force: true do |t|
     t.datetime "start_date"
@@ -41,7 +44,17 @@ ActiveRecord::Schema.define(version: 20130818014345) do
     t.datetime "updated_at"
   end
 
-  add_index "calendars", ["user_id"], name: "index_calendars_on_user_id", using: :btree
+  add_index "calendars", ["user_id"], name: "index_calendars_on_user_id"
+
+  create_table "products", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "picture_url"
+    t.string   "business_id"
+    t.decimal  "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -51,9 +64,12 @@ ActiveRecord::Schema.define(version: 20130818014345) do
     t.string   "password_digest"
     t.string   "remember_token"
     t.boolean  "admin",           default: false
+    t.string   "type"
+    t.string   "description"
+    t.string   "logo_url"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
 
 end

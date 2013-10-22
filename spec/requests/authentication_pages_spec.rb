@@ -26,19 +26,33 @@ describe "Authentication" do
       end
     end
 
-    describe "with valid information" do
+    describe "user with valid information" do
       let(:user) { FactoryGirl.create(:user) }
-     # before do
-     #   fill_in "Email",    with: user.email.upcase
-     #   fill_in "Password", with: user.password
-     #   click_button "Sign in"
-     # end
+            
       before {sign_in user}
 
       it { should have_title(user.name) }
       it { should have_link('Users',       href: users_path) }
       it { should have_link('Profile',     href: user_path(user)) }
       it { should have_link('Settings',    href: edit_user_path(user)) }
+      it { should have_link('Sign out',    href: signout_path) }
+      it { should_not have_link('Sign in', href: signin_path) }
+
+      describe "followed by signout" do
+        before {click_link "Sign out"}
+        it { should have_link "Sign in"}
+      end
+    end
+
+    describe "business with valid information" do
+      let(:business) { FactoryGirl.create(:business) }
+            
+      before {sign_in business}
+
+      it {should have_title(business.name)}
+      it { should have_link('Users',       href: users_path) }
+      it { should have_link('Profile',     href: business_path(business)) }
+      it { should have_link('Settings',    href: edit_user_path(business)) }
       it { should have_link('Sign out',    href: signout_path) }
       it { should_not have_link('Sign in', href: signin_path) }
 
@@ -83,9 +97,7 @@ describe "Authentication" do
           before { visit users_path}
           it {should have_title('Sign in')}
         end
-
       end 
-
     end
 
     describe "as wrong user" do

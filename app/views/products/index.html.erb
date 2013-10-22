@@ -1,0 +1,24 @@
+<% provide(:title, @business.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= gravatar_for @business %>
+        <%= @business.name %>
+      </h1>
+    </section>
+  </aside>
+  <div class="span8">
+    <section>
+      <h3>Create a Product</h3>
+      <%= render 'form' %>
+    </section>
+    <% if @business.products.any? %>
+      <h3>Products (<%= @business.products.count %>)</h3>
+      <ol class="products">
+        <%= render partial: 'show', collection: @business.products, as: :product %>
+      </ol>
+      <%= will_paginate @business.products %>
+    <% end %>
+  </div>
+</div>

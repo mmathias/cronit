@@ -1,0 +1,21 @@
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="span3">
+    <section>
+      <h1>
+      <%= @user.type%>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+      </h1>
+    </section>
+  </aside>
+  <aside class="span7 ">
+    <% if @user.calendars.any? %>
+      <h3>Scheduled Job (<%= @user.calendars.count %>)</h3>
+      <section class="calendars">
+        <%= render @calendars %>
+      </section>
+      <%= will_paginate @calendars %>
+    <% end %>
+  </aside>
+</div>

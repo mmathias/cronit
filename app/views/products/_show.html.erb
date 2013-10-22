@@ -1,0 +1,26 @@
+<li id="<%= product.id %>">
+  <span class="title">Product ID #<%= product.id %> </span>
+  <div class="show-field">
+    <span class="content-label">Name:</span>
+    <span class="content"><%= product.name %></span>
+  </div>
+  <div class="show-field">
+    <span class="content-label">Description:</span>
+    <span class="content"><%= product.description %> </span>
+  </div>
+  <div class="show-field">
+    <span class="content-label">Picture URL:</span>
+    <span class="content"><%= product.picture_url %> </span>
+  </div>
+  <div class="show-field">
+    <span class="content-label">Price:</span>
+    <span class="content"><%= product.price %> </span>
+  </div>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(product.created_at) %> ago.
+  </span>
+  <% if current_user?(product.business) %>
+    <%= link_to "delete", product, method: :delete,data: {confirm: "You sure?"}, title: product.id %>
+    <%= link_to "edit", product_path(product) %>
+  <% end %>
+</li>

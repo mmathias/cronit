@@ -1,6 +1,12 @@
 <% if @feed_items.any? %>
-  <ol class="calendars">
-    <%= render partial: 'shared/feed_item', collection: @feed_items %>
-  </ol>
-  <%= will_paginate @feed_items %>
+	<% if business? %>	
+		<ol class="products">
+			<%= render partial: 'shared/feed_product_item', collection: @feed_items %>
+		</ol>
+	<%else%>
+		<ol class="calendars">
+			<%= render partial: 'shared/feed_item', collection: @feed_items %>
+		</ol>
+	<%end%>
+	<%= will_paginate @feed_items %>
 <% end %>

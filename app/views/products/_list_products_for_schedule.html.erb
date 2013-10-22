@@ -1,0 +1,6 @@
+<% if business.products.any? %>
+  	<section id="business-<%= business.id %>" class="product">
+		<h3>Products (<%= business.products.count %>)</h3>
+    	<%= render business.products %>
+  	</section>
+<% end %>

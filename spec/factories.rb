@@ -9,6 +9,11 @@ FactoryGirl.define do
    		admin true
     end
   end
+  factory :business, :class => Business, :parent => :user  do
+    logo_url "http://www.lamole.com.br/portal/img/logo.png"
+    description "This restaurant is the best in the city"
+    type "Business"
+  end
   
   factory :calendar do
   	start_date 1.hour.from_now
@@ -33,8 +38,18 @@ FactoryGirl.define do
 
   factory :calendar_item do
     calendar
+    price 100.00
+    quantity 20
     execution_date 1.day.from_now
     done false
+  end
+
+  factory :product do
+    business
+    price 10.00
+    sequence(:name) { |n| "Product #{n}" }
+    description "The best products ever"
+    picture_url "http://www.caminodesantiago.me/wp-content/uploads/socks.png"
   end
 
 end

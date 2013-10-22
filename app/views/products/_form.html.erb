@@ -1,0 +1,26 @@
+<%= form_for(@product) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  Name:
+  <div class="field">
+    <%= f.text_field :name%>
+  </div>
+  Description:
+  <div class="field">
+    <%= f.text_field :description%>
+  </div>
+  Picture URL:
+  <div class="field">
+    <%= f.text_field :picture_url%>
+  </div>
+  Price:
+  <div class="field">
+    <%= f.text_field :price%>
+  </div>
+  <% if @product.persisted? %>
+    <%= f.submit "Save", class: "btn btn-large btn-primary" %>
+    <%= link_to "Cancel", products_path,data: {confirm: "You sure?"}%>
+  <% else %>
+    <%= f.submit "Add", class: "btn btn-large btn-primary" %>
+
+  <% end %>
+<% end %>

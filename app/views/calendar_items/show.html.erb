@@ -1,0 +1,21 @@
+<% provide(:title, current_user.name) %>
+<div class="row">
+  <aside class="span3">
+    <section>
+      <h1>
+      <%= current_user.type%>
+        <%= gravatar_for current_user %>
+        <%= current_user.name %>
+      </h1>
+    </section>
+  </aside>
+  <aside class="span7 ">
+    <% if @calendar_items.any? %>
+      <h3>Scheduled Job Actions (<%= @calendar_items.count %>)</h3>
+      <section class="calendars">
+        <%= render partial: 'shared/calendar_item_item', collection: @calendar_items %>
+      </section>
+      <%= will_paginate @calendar_items %>
+    <% end %>
+  </aside>
+</div>

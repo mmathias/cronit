@@ -9,8 +9,7 @@ class Calendar < ActiveRecord::Base
   validates :how_long, presence: true
 
   accepts_nested_attributes_for :actions, :reject_if => lambda { |a| a[:content].blank? }, :allow_destroy => true
-#  validates :calendar_items, presence: true
-#  validates :actions, presence: true
+
 
   before_save do
     #take the start date + how_long = end_date
@@ -39,7 +38,7 @@ class Calendar < ActiveRecord::Base
         addition = 'year' 
       end
       execution_date = execution_date + 1.send(addition)
-      self.calendar_items.build(execution_date: execution_date, done: false )
+      self.calendar_items.build(execution_date: execution_date, done: false, quantity: 10, price: 20.0 )
     end
   end
 end

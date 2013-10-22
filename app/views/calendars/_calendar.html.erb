@@ -1,8 +1,35 @@
-<li>
-  <span class="start_date"><%= calendar.start_date %></span>
-  <span class="how_often"><%= calendar.how_often %></span>
-  <span class="how_long"><%= calendar.how_long %></span>
+<li id="<%= calendar.id %>">
+  <span class="title">Scheduled Job ID #<%= calendar.id %> </span>
+  <div class="show-field">
+    <span class="content-label">Start Date:</span>
+    <span class="content"><%= calendar.start_date.to_formatted_s(:long_ordinal) %> </span>
+  </div>
+  <div class="show-field">
+    <span class="content-label">How Long:</span>
+    <span class="content"><%= calendar.how_long %> </span>
+  </div>
+  <div class="show-field">
+    <span class="content-label">How Often:</span>
+    <span class="content"><%= calendar.how_often %> </span>
+  </div>
+  <div class="show-field">
+    <span class="content-label">Actions: </span>
+    <span class="content">
+      <ul class="subitems">
+        <%= render partial: 'shared/action_item', collection: calendar.actions %>
+      </ul>
+    </span>
+  </div>
+  <div class="show-field">
+    <span class="content-label">Calendar items:</span>
+    <span class="content">
+    	<%= link_to "Progress", show_calendar_items_path(calendar.id) %>
+    </span>
+  </div>
   <span class="timestamp">
     Posted <%= time_ago_in_words(calendar.created_at) %> ago.
   </span>
+  <% if current_user?(calendar.user) %>
+    <%= link_to "delete", calendar, method: :delete,data: {confirm: "You sure?"}, title: calendar.id %>
+  <% end %>
 </li>

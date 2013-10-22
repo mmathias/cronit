@@ -225,13 +225,16 @@ input {
 
 /* calendars */
 
-.calendars {
+.calendars, .products {
   list-style: none;
   margin: 10px 0 0 0;
 
   li {
     padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
+    border-top: 1px solid $grayLighter;
+    &:first-child{
+      border-top: 0;
+    }
   }
 }
 .content {
@@ -280,4 +283,37 @@ aside {
 
 .remove_link{
   float:right;
+}
+
+
+/* business */
+
+.business{
+  
+  li{
+    float:left;
+    width:20%;
+    list-style: none;
+  }
+
+}
+
+.products{
+  border:0;
+  display:none;
+  .product{
+    display:none;
+    border:0;
+    li{
+      margin-right:5px;
+      border:0;
+      float:left;
+      width:30%;
+      list-style: none;
+      .show-image{
+        height:125px;
+        background-color:lightcyan;
+      }
+    }
+  }
 }
