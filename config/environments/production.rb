@@ -76,5 +76,14 @@ SampleApp1::Application.configure do
   # config.autoflush_log = false
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = ::Logger::Formatter.new
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.sendgrid.net',
+    port:                 587,
+    domain:               'sendgrid.net',
+    user_name:            'app17567903@heroku.com',
+    password:             'dsndgwug',
+    authentication:       'plain',
+    enable_starttls_auto: true  
+  }
 end
