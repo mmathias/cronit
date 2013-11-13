@@ -13,12 +13,12 @@
       <h3>Create a Product</h3>
       <%= render 'form' %>
     </section>
-    <% if @business.products.any? %>
-      <h3>Products (<%= @business.products.count %>)</h3>
+    <% if @products.any? %>
+      <h3>Products (<%= @products.count %>)</h3>
       <ol class="products">
-        <%= render partial: 'show', collection: @business.products, as: :product %>
+        <%= render partial: 'show', collection: @products, as: :product %>
       </ol>
-      <%= will_paginate @business.products %>
+      <%= will_paginate @products %>
     <% end %>
   </div>
 </div>

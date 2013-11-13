@@ -11,15 +11,6 @@ class ProductsController < ApplicationController
   def create
 
     @product = current_user.products.create(product_params)
-    # actions_attributes = product_params["actions_attributes"];
-    # actions = nil
-    # if actions_attributes != nil
-    #   actions_attributes.each do |key, action_attribute|
-    #     command = action_attribute[:command]
-    #     Rails.logger.debug("My object: #{command.inspect}")
-    #     @product.actions.build(command: command)
-    #   end
-    # end
     if @product.save
       flash[:success] = "Product created!"
       redirect_to products_path

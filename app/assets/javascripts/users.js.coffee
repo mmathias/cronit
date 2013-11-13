@@ -23,11 +23,12 @@ updateHiddenHashFormField = (product_id, value)->
   $('#calendar_products_hash').val(JSON.stringify(old_products_hash))
 
 hide_all_products = () ->
-  do $("section.products .product").hide
-  do $("section.products .product").parent().hide
+  products_listed = $("section.business-products")
+  do products_listed.hide
+  do products_listed.parent().hide
 
 show_products = (id) ->
-  products_section = $("section.products #" + id)
+  products_section = $("section.businesses-products #" + id)
   do products_section.show
   do products_section.parent().show
 
@@ -44,8 +45,8 @@ increase_counter = (element) ->
   updateHiddenHashFormField(element.attr('id'), counter)
 
 $(document).ready ->
-  $(".business-products").bind 'click', ->
+  $(".business-link").bind 'click', ->
     hide_all_products()
     show_products($(this).attr 'id')	
-  $("section.products section.product li").bind 'click', ->
+  $("section.businesses-products section.business-products li").bind 'click', ->
     increase_counter($(this))
