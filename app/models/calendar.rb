@@ -4,14 +4,25 @@ class Calendar < ActiveRecord::Base
   validates :user_id, presence: true
   has_many :calendar_items, dependent: :destroy
   has_many :actions, dependent: :destroy
+  has_many :calendar_products, dependent: :destroy
   validates :start_date , presence: true
   validates :how_often, presence: true
   validates :how_long, presence: true
+  attr_accessor :products_hash
 
   accepts_nested_attributes_for :actions, :reject_if => lambda { |a| a[:content].blank? }, :allow_destroy => true
 
 
   before_save do
+
+    #logger.debug(self.products_hash)
+    parsed_products = JSON.parse(self.products_hash)
+
+    parsed_products.each do |product|
+      self.calendar_products.build(product_id: product["product_id"], quantity: product["quantity"], calendar_id: self.id)
+    end
+    #logger.debug(self.calendar_products)
+
     #take the start date + how_long = end_date
     #eg. 10/10/2010 + 1 year
     how_long_splitted = self.how_long.split
@@ -38,7 +49,7 @@ class Calendar < ActiveRecord::Base
         addition = 'year' 
       end
       execution_date = execution_date + 1.send(addition)
-      self.calendar_items.build(execution_date: execution_date, done: false, quantity: 10, price: 20.0 )
+      self.calendar_items.build(execution_date: execution_date, done: false)
     end
   end
 end

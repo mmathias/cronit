@@ -11,8 +11,6 @@ class CalendarsController < ApplicationController
 
     @calendar = current_user.calendars.create(calendar_params)
 
-    actions_attributes = calendar_params["actions_attributes"];
-
 		if @calendar.save
 			flash[:success] = "Calendar created!"
 			redirect_to root_url
@@ -29,7 +27,7 @@ class CalendarsController < ApplicationController
   
   private 
     def calendar_params
-      params.require(:calendar).permit(:start_date, :how_often, :how_long, actions_attributes: [:command, :_destroy])
+      params.require(:calendar).permit(:start_date, :how_often, :how_long, :products_hash, actions_attributes: [:command, :_destroy])
     end
     
     def correct_user

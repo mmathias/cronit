@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131009232153) do
+ActiveRecord::Schema.define(version: 20131110233218) do
 
   create_table "actions", force: true do |t|
     t.string   "command"
@@ -28,12 +28,18 @@ ActiveRecord::Schema.define(version: 20131009232153) do
     t.integer  "calendar_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "product_id"
-    t.integer  "quantity"
     t.decimal  "price"
   end
 
   add_index "calendar_items", ["calendar_id"], name: "index_calendar_items_on_calendar_id"
+
+  create_table "calendar_products", force: true do |t|
+    t.integer  "product_id"
+    t.integer  "calendar_id"
+    t.integer  "quantity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "calendars", force: true do |t|
     t.datetime "start_date"

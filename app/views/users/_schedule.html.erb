@@ -10,20 +10,4 @@
 
 Delivery?<br/>
 
-<%= form_for(@calendar) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-  Start Date:
-  <div class="field">
-    <%= f.datetime_select :start_date%>
-  </div>
-  How often:
-  <div class="field">
-    <%= f.text_field :how_often, placeholder: "eg. daily, weekly, monthly" %>
-  </div>
-  How long:
-  <div class="field">
-    <%= f.text_field :how_long, placeholder: "eg. 1 year, 2 months" %>
-  </div>
-
-  <%= f.submit "Add", class: "btn btn-large btn-primary" %>
-<% end %>
+<%= render 'calendars/form' %>

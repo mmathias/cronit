@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Today's delivery to <%= @user.name %></h1>
+    <p>
+      You will have all your products delivery today <%= @calendar_item.execution_date %>
+    </p>
+    <p>
+      If you want to check the status of your schedule, go to your scheduled jobs page using your email (<%= @user.email %>) or just <a href="http://localhost:3000/users/<%= @user.id %>">click here</a>,
+    </p>
+    <p>Thanks for opting to us and have a great day!</p>
+  </body>
+</html>

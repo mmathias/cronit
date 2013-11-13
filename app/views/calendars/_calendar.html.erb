@@ -13,10 +13,10 @@
     <span class="content"><%= calendar.how_often %> </span>
   </div>
   <div class="show-field">
-    <span class="content-label">Actions: </span>
+    <span class="content-label">Products: </span>
     <span class="content">
       <ul class="subitems">
-        <%= render partial: 'shared/action_item', collection: calendar.actions %>
+        <%= render partial: 'calendar_products/show', collection: calendar.calendar_products, as: :product  %>
       </ul>
     </span>
   </div>
