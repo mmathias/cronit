@@ -18,6 +18,7 @@ html {
 
 body {
   padding-top: 60px;
+  background: url(puckered.png) 50% 0 no-repeat fixed;
 }
 
 section {
@@ -316,4 +317,45 @@ aside {
       }
     }
   }
+}
+
+
+.logo{
+
+  color:white;
+  border: 3px solid #ccc;
+  width: 180px;
+  height: 61px;
+  font-family: 'Cabin Sketch', cursive; 
+  font-size: 60px; 
+  margin: 25px 0; 
+  line-height: 1em;
+  padding: 0px 5px;
+  float:left;
+
+  .logo-cron{
+
+  }
+  .logo-it{
+    color: red;
+    font-size: 35px;
+    font-weight: bolder;
+  }
+}
+
+nav{
+  float: right;
+  margin: 20px 0px;
+  .navbar-inner{
+    background: url(puckered.png) 50% 0 no-repeat fixed; 
+    .container{
+      width:auto;
+      // background: url(grain.png) repeat #333;
+    }
+  }
+}
+
+.container{
+  width:auto;
+  // background: url(grain.png) repeat #333;
 }
