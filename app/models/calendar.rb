@@ -3,23 +3,24 @@ class Calendar < ActiveRecord::Base
   default_scope -> { order('created_at DESC') }
   validates :user_id, presence: true
   has_many :calendar_items, dependent: :destroy
-  has_many :actions, dependent: :destroy
-  has_many :calendar_products, dependent: :destroy
+  # has_many :actions, dependent: :destroy
+  has_many :calendars_products, class_name: "CalendarProduct", dependent: :destroy  
   validates :start_date , presence: true
   validates :how_often, presence: true
   validates :how_long, presence: true
   attr_accessor :products_hash
 
-  accepts_nested_attributes_for :actions, :reject_if => lambda { |a| a[:content].blank? }, :allow_destroy => true
-
+  # accepts_nested_attributes_for :actions, :reject_if => lambda { |a| a[:content].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :calendars_products
 
   before_save do
 
     #logger.debug(self.products_hash)
-    parsed_products = JSON.parse(self.products_hash)
-
-    parsed_products.each do |product|
-      self.calendar_products.build(product_id: product["product_id"], quantity: product["quantity"], calendar_id: self.id)
+    if (!self.products_hash.nil? )
+      parsed_products = JSON.parse(self.products_hash)
+      parsed_products.each do |product|
+        self.calendar_products.build(product_id: product["product_id"], quantity: product["quantity"], calendar_id: self.id)
+      end
     end
     #logger.debug(self.calendar_products)
 

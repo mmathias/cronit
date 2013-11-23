@@ -68,7 +68,7 @@ describe "Business pages" do
   end
 
   describe "signup page" do
-    before { visit signup_business_path }
+    before { visit signup_businesses_path }
 
     it { should have_content('Sign up') }
     it { should have_title(full_title('Sign up')) }
@@ -76,7 +76,7 @@ describe "Business pages" do
 
   describe "signup business" do
 
-    before { visit signup_business_path }
+    before { visit signup_businesses_path }
 
     let(:submit) { "Create my account" }
 

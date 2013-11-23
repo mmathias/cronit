@@ -31,6 +31,8 @@ describe "Calendar pages" do
       before { select "27", :from => 'calendar_start_date_5i' }
       before { fill_in 'calendar_how_often', with: "weekly" }
       before { fill_in 'calendar_how_long', with: "1 month" }
+
+      before { find("#calendar_products_hash[type='hidden']").set("[{\"product_id\":\"351\",\"quantity\":2},{\"product_id\":\"16\",\"quantity\":2}]") }
       it "should create a calendar" do
         expect { click_button "Add" }.to change(Calendar, :count).by(1)
       end

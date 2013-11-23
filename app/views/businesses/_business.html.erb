@@ -1,4 +1,7 @@
 <li id="business-<%= business.id %>" class="business-link">
 	<%= gravatar_for business, size: 80 %>
 	<%= business.name %>
+	<% if current_user.admin? && !current_user?(business) %>
+  	| <%= link_to "delete", business, method: :delete, data: {confirm: "You sure?" } %>
+    <% end %>
 </li>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131110233218) do
+ActiveRecord::Schema.define(version: 20131123015814) do
 
   create_table "actions", force: true do |t|
     t.string   "command"
@@ -20,26 +20,18 @@ ActiveRecord::Schema.define(version: 20131110233218) do
     t.datetime "updated_at"
   end
 
-  add_index "actions", ["calendar_id"], name: "index_actions_on_calendar_id"
+  add_index "actions", ["calendar_id"], name: "index_actions_on_calendar_id", using: :btree
 
   create_table "calendar_items", force: true do |t|
     t.datetime "execution_date"
-    t.boolean  "done",           default: false
+    t.boolean  "done",                                    default: false
     t.integer  "calendar_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "price"
+    t.decimal  "price",          precision: 10, scale: 0
   end
 
-  add_index "calendar_items", ["calendar_id"], name: "index_calendar_items_on_calendar_id"
-
-  create_table "calendar_products", force: true do |t|
-    t.integer  "product_id"
-    t.integer  "calendar_id"
-    t.integer  "quantity"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "calendar_items", ["calendar_id"], name: "index_calendar_items_on_calendar_id", using: :btree
 
   create_table "calendars", force: true do |t|
     t.datetime "start_date"
@@ -50,14 +42,22 @@ ActiveRecord::Schema.define(version: 20131110233218) do
     t.datetime "updated_at"
   end
 
-  add_index "calendars", ["user_id"], name: "index_calendars_on_user_id"
+  add_index "calendars", ["user_id"], name: "index_calendars_on_user_id", using: :btree
+
+  create_table "calendars_products", force: true do |t|
+    t.integer  "product_id"
+    t.integer  "calendar_id"
+    t.integer  "quantity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "products", force: true do |t|
     t.string   "name"
     t.string   "description"
     t.string   "picture_url"
     t.string   "business_id"
-    t.decimal  "price"
+    t.decimal  "price",       precision: 10, scale: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 20131110233218) do
     t.string   "logo_url"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
 
 end

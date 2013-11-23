@@ -52,8 +52,8 @@ describe "User pages" do
 
   describe "profile page" do
     let(:user) { FactoryGirl.create(:user) }
-    let!(:c1) { FactoryGirl.create(:calendar, user: user, start_date: 1.hour.from_now) }
-    let!(:c2) { FactoryGirl.create(:calendar, user: user, start_date: 2.hour.from_now) }
+    let!(:c1) { FactoryGirl.create(:calendar_with_products, user: user, start_date: 1.hour.from_now) }
+    let!(:c2) { FactoryGirl.create(:calendar_with_products, user: user, start_date: 2.hour.from_now) }
     before { visit user_path(user) }
 
     it { should have_content(user.name) }
@@ -68,7 +68,7 @@ describe "User pages" do
   end
 
   describe "signup page" do
-    before { visit signup_user_path }
+    before { visit signup_users_path }
 
     it { should have_content('Sign up') }
     it { should have_title(full_title('Sign up')) }
@@ -76,7 +76,7 @@ describe "User pages" do
 
   describe "signup user" do
 
-    before { visit signup_user_path }
+    before { visit signup_users_path }
 
     let(:submit) { "Create my account" }
 

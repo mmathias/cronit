@@ -14,5 +14,21 @@
     <%= f.text_field :how_long, placeholder: "eg. 1 year, 2 months" %>
   </div>
 
+  <div class="field">
+    <%= f.fields_for :calendars_products do |ff| %>
+      Product ID
+      <div class="field">
+        <%= ff.text_field :product_id%>
+      </div>
+
+      Quantity:
+      <div class="field">
+        <%= ff.text_field :quantity%>
+      </div>
+
+      <%= ff.submit "Confirm", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+
   <%= f.submit "Add", class: "btn btn-large btn-primary" %>
 <% end %>

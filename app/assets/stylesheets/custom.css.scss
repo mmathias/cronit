@@ -343,19 +343,9 @@ aside {
   }
 }
 
-nav{
-  float: right;
-  margin: 20px 0px;
-  .navbar-inner{
-    background: url(puckered.png) 50% 0 no-repeat fixed; 
-    .container{
-      width:auto;
-      // background: url(grain.png) repeat #333;
-    }
-  }
-}
 
-.container{
-  width:auto;
-  // background: url(grain.png) repeat #333;
+.container {
+  background: white;
+  position: relative;
+  top: 60px;
 }

@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :user do
   	sequence(:name) { |n| "Person #{n}" }
-  	sequence(:email) { |n| "person_#{n}@example.com"}
+  	sequence(:email) { |n| "person_#{n}#{n}@example.com"}
   	password "foobar"
     password_confirmation "foobar"
 
@@ -9,6 +9,7 @@ FactoryGirl.define do
    		admin true
     end
   end
+
   factory :business, :class => Business, :parent => :user  do
     logo_url "http://www.lamole.com.br/portal/img/logo.png"
     description "This restaurant is the best in the city"
@@ -20,7 +21,6 @@ FactoryGirl.define do
   	how_often 'weekly'
   	how_long '1 month'
   	user
-    
     factory :calendar_with_items do 
       ignore do 
         calendar_items_count 3 
@@ -29,8 +29,24 @@ FactoryGirl.define do
         |calendar, evaluator| FactoryGirl.create_list(:calendar_item, evaluator.calendar_items_count, :calendar => calendar) 
       end 
     end
+
+    factory :calendar_with_products do 
+      ignore do 
+        calendar_products_count 3 
+      end 
+      after(:create) do 
+        |calendar, evaluator| FactoryGirl.create_list(:calendar_product, evaluator.calendar_products_count, :calendar => calendar) 
+      end 
+    end
+
   end
-  
+
+  factory :calendar_product, :class => 'CalendarProduct' do
+    product
+    calendar
+    quantity 4        
+  end
+
   factory :action  do
     calendar
     command 'mandar email'
@@ -38,8 +54,6 @@ FactoryGirl.define do
 
   factory :calendar_item do
     calendar
-    price 100.00
-    quantity 20
     execution_date 1.day.from_now
     done false
   end
